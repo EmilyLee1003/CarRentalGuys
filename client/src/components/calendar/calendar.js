@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import { Calendar } from "react-date-range";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 
-function booking() {
-  // const [date, setDate] = useState("");
-
+function calendar() {
   return (
     <div>
       <Calendar></Calendar>
@@ -12,4 +12,4 @@ function booking() {
   );
 }
 
-export default booking;
+export default calendar;

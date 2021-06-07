@@ -1,10 +1,10 @@
 import react from "react";
-
 import Navigation from "./components/navBar/navBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import booking from "./components/calendar/calendar";
+import booking from "./pages/booking";
 import mainPage from "./pages/main";
+import about from "./pages/about";
 
 function App() {
   return (
@@ -16,8 +16,9 @@ function App() {
       <div>
         <Router>
           <Switch>
-            <Route path="/calendar" component={booking}></Route>
+            <Route path="/booking" component={booking}></Route>
             <Route path="/" component={mainPage}></Route>
+            <Route path="/about" component={about}></Route>
           </Switch>
         </Router>
       </div>

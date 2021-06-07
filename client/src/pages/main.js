@@ -1,31 +1,45 @@
 import react from "react";
-
+import "./style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import bmw1 from "../img/bmw1.jpg";
+import mercedes2 from "../img/mercedes2.jpg";
+import supra1 from "../img/supra1.jpg";
+// import About from "../components/about/about.js";
+function MainPage() {
+  let history = useHistory();
 
-function mainPage() {
+  function bookButton() {
+    history.push("/booking");
+  }
+
+  function aboutPage() {
+    history.push("/about");
+  }
   return (
-    <div>
-      <div>
+    <div className="main">
+      {/* <About></About> */}
+      <div className="car1">
         <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180" />
+          <Card.Img variant="top" src={bmw1} />
           <Card.Body>
             <Card.Title>BMW M850i Converitible</Card.Title>
             <Card.Text>
-              BMW 8 series hits the mark for a halo sports car from a brand that
-              foments high expectations. It's a well-rounded luxury sports car
-              with enjoyable performance, an upscale interior, lots of cargo
-              space, and intuitive technology.
+              Brand new 2021 M850i convertible! 523 horsepower all wheel drive
+              amazing power, perfect for those sunny California days! Drives
+              like a grand tourer with the power when you need it.
             </Card.Text>
-            <Button variant="primary">Book Now</Button>
+            <Button variant="primary" onClick={bookButton}>
+              Book Now
+            </Button>
           </Card.Body>
         </Card>
       </div>
-      <div>
+      <div className="car2">
         <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180" />
+          <Card.Img variant="top" src={mercedes2} />
           <Card.Body>
             <Card.Title>Mercedes C43 AMG 2019</Card.Title>
             <Card.Text>
@@ -34,13 +48,15 @@ function mainPage() {
               automatic transmission that swaps cogs with both speed and
               precision
             </Card.Text>
-            <Button variant="primary">Book Now</Button>
+            <Button variant="primary" onClick={bookButton}>
+              Book Now
+            </Button>
           </Card.Body>
         </Card>
       </div>
-      <div>
+      <div className="car3">
         <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180" />
+          <Card.Img variant="top" src={supra1} />
           <Card.Body>
             <Card.Title>Toyota Supra 2020</Card.Title>
             <Card.Text>
@@ -49,7 +65,9 @@ function mainPage() {
               twin-turbocharged inline-six engine with 320 horsepower and 315
               pound-feet of torque, paired with a six-speed manual transmission.
             </Card.Text>
-            <Button variant="primary">Book Now</Button>
+            <Button variant="primary" onClick={bookButton}>
+              Book Now
+            </Button>
           </Card.Body>
         </Card>
       </div>
@@ -57,4 +75,4 @@ function mainPage() {
   );
 }
 
-export default mainPage;
+export default MainPage;

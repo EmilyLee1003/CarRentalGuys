@@ -1,0 +1,14 @@
+.form {
+  background-color: skyblue;
+  width: 50%;
+  padding: 100px;
+}
+
+.car1 {
+  background-color: pink;
+  float: left;
+}
+
+.car2 {
+  float: left;
+}
