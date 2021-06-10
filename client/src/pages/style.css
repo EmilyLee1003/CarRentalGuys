@@ -12,3 +12,53 @@
 .car2 {
   float: left;
 }
+
+.contact-form {
+  background-color: skyblue;
+  font-family: "Playfair Display", serif;
+  padding: 100px;
+  width: 500px;
+}
+
+.banner1 {
+  background-color: lightgreen;
+  position: relative;
+  width: 100%;
+}
+
+.banner1img {
+  width: 100%;
+  height: 600px;
+}
+
+.bookbutton {
+  position: absolute;
+  top: 50%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  padding: 16px 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  font-family: "Playfair Display", serif;
+}
+
+.bannercaption {
+  position: absolute;
+  top: 50%;
+  right: 30%;
+}
+.bookbutton:hover {
+  background-color: grey;
+  color: white;
+}
+
+.cardBody {
+  height: 300px;
+  font-family: "Playfair Display", serif;
+}

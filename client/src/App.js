@@ -11,9 +11,6 @@ function App() {
     <div className="App">
       <Navigation></Navigation>
       <div>
-        <h1>Welcome</h1>
-      </div>
-      <div>
         <Router>
           <Switch>
             <Route path="/booking" component={booking}></Route>
