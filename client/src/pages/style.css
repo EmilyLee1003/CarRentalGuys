@@ -62,3 +62,9 @@
   height: 300px;
   font-family: "Playfair Display", serif;
 }
+
+.render-chat {
+  background-color: thistle;
+  height: 300px;
+  width: 30%;
+}

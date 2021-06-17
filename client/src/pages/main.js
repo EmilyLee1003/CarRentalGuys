@@ -1,5 +1,6 @@
-import react from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./style.css";
+import io from "socket.io-client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -8,8 +9,44 @@ import bmw1 from "../img/bmw1.jpg";
 import mercedes2 from "../img/mercedes2.jpg";
 import supra1 from "../img/supra1.jpg";
 import banner1 from "../img/mercedes4.jpg";
-// import About from "../components/about/about.js";
+
+const socket = io.connect("http://localhost:5000");
+
 function MainPage() {
+  const [state, setState] = useState({ message: "", name: "" });
+  const [chat, setChat] = useState([]);
+  const socketRef = useRef();
+
+  useEffect(() => {
+    socketRef.current = io.connect("http://localhost:5000");
+    socketRef.current.on("message", ({ name, message }) => {
+      setChat([...chat, { name, message }]);
+    });
+  });
+
+  const onTextChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
+  };
+
+  const onMessageSubmit = (e) => {
+    const { name, message } = state;
+    socketRef.current.emit("message", { name, message });
+    e.preventDefault();
+    setState({ message: "", name });
+  };
+
+  console.log(state);
+
+  const renderChat = () => {
+    return chat.map(({ name, message }, index) => (
+      <div key={index}>
+        <h3>
+          {name}: <span>{message}</span>
+        </h3>
+      </div>
+    ));
+  };
+
   let history = useHistory();
 
   function bookButton() {
@@ -31,6 +68,35 @@ function MainPage() {
       <br></br>
       <br></br>
       <br></br>
+      <div className="card">
+        <form onSubmit={onMessageSubmit}>
+          <h1> Messenger</h1>
+          <div className="name-field">
+            <textarea
+              name="name"
+              value={state.name}
+              onChange={(e) => onTextChange(e)}
+            >
+              {" "}
+            </textarea>
+          </div>
+          <div className="message-field">
+            <textarea
+              name="message"
+              value={state.message}
+              onChange={(e) => onTextChange(e)}
+            >
+              {" "}
+            </textarea>
+          </div>
+          <button onSubmit={onMessageSubmit}> send message</button>
+        </form>
+        <div className="render-chat">
+          <h1> chat log </h1>
+          {renderChat()}
+        </div>
+      </div>
+
       <div className="carList">
         <div className="car1">
           <Card style={{ width: "30rem" }}>
