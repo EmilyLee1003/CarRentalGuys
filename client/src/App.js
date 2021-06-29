@@ -1,10 +1,12 @@
-import react from "react";
+import React from "react";
+import ReactDOM from "react-dom";
 import Navigation from "./components/navBar/navBar";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import booking from "./pages/booking";
-import mainPage from "./pages/main";
-import about from "./pages/about";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Booking from "./pages/booking";
+import MainPage from "./pages/MainPage";
+import About from "./pages/about";
+import UserAuth from "./pages/UserAuth";
 
 function App() {
   return (
@@ -13,9 +15,10 @@ function App() {
       <div>
         <Router>
           <Switch>
-            <Route path="/booking" component={booking}></Route>
-            <Route path="/" component={mainPage}></Route>
-            <Route path="/about" component={about}></Route>
+            <Route path="/Booking" component={Booking}></Route>
+            <Route path="/MainPage" component={MainPage}></Route>
+            <Route path="/About" component={About}></Route>
+            <Route path="/userAuth" component={UserAuth}></Route>
           </Switch>
         </Router>
       </div>

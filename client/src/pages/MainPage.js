@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./style.css";
-import io from "socket.io-client";
+import { io } from "socket.io-client";
+import TextField from "@material-ui/core/TextField";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -10,19 +11,19 @@ import mercedes2 from "../img/mercedes2.jpg";
 import supra1 from "../img/supra1.jpg";
 import banner1 from "../img/mercedes4.jpg";
 
-const socket = io.connect("http://localhost:5000");
-
 function MainPage() {
   const [state, setState] = useState({ message: "", name: "" });
   const [chat, setChat] = useState([]);
+
   const socketRef = useRef();
 
   useEffect(() => {
-    socketRef.current = io.connect("http://localhost:5000");
+    socketRef.current = io("http://localhost:5000");
     socketRef.current.on("message", ({ name, message }) => {
       setChat([...chat, { name, message }]);
     });
-  });
+    return () => socketRef.current.disconnect();
+  }, [chat]);
 
   const onTextChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -34,8 +35,6 @@ function MainPage() {
     e.preventDefault();
     setState({ message: "", name });
   };
-
-  console.log(state);
 
   const renderChat = () => {
     return chat.map(({ name, message }, index) => (
@@ -56,6 +55,7 @@ function MainPage() {
   function reserveButton() {
     history.push("/booking");
   }
+
   return (
     <div className="main">
       <div className="banner1">
@@ -68,31 +68,32 @@ function MainPage() {
       <br></br>
       <br></br>
       <br></br>
+
       <div className="card">
         <form onSubmit={onMessageSubmit}>
-          <h1> Messenger</h1>
+          <h1>Messenger</h1>
           <div className="name-field">
-            <textarea
+            <TextField
               name="name"
+              onChange={(e) => onTextChange(e)}
               value={state.name}
-              onChange={(e) => onTextChange(e)}
-            >
-              {" "}
-            </textarea>
+              label="Name"
+            />
           </div>
-          <div className="message-field">
-            <textarea
+          <div>
+            <TextField
               name="message"
-              value={state.message}
               onChange={(e) => onTextChange(e)}
-            >
-              {" "}
-            </textarea>
+              value={state.message}
+              id="outlined-multiline-static"
+              variant="outlined"
+              label="Message"
+            />
           </div>
-          <button onSubmit={onMessageSubmit}> send message</button>
+          <button>Send Message</button>
         </form>
         <div className="render-chat">
-          <h1> chat log </h1>
+          <h1>Chat Log</h1>
           {renderChat()}
         </div>
       </div>

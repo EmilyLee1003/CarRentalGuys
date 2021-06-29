@@ -1,6 +1,6 @@
 import React from "react";
 import ContactForm from "../components/contactForm/contactForm";
-function bookingPage() {
+function BookingPage() {
   return (
     <div>
       <div className="contactForm">
@@ -10,4 +10,4 @@ function bookingPage() {
   );
 }
 
-export default bookingPage;
+export default BookingPage;
