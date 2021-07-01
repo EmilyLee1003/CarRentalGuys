@@ -8,7 +8,7 @@ function Navigation() {
     <div>
       <Navbar bg="dark" variant="dark">
         <Nav className="mr-auto">
-          <Nav.Link href="home">Home</Nav.Link>
+          <Nav.Link href="mainpage">Home</Nav.Link>
           <Nav.Link href="about">About</Nav.Link>
           <Nav.Link href="booking">book</Nav.Link>
         </Nav>

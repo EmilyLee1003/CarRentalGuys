@@ -1,9 +1,28 @@
 import React from "react";
-import { Calendar, DateRangePicker } from "react-date-range";
-// import "./style.css";
+import { useState } from "react";
 import emailjs from "emailjs-com";
-
+import Modal from "react-modal";
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
 function ContactForm() {
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   function sendEmail(e) {
     e.preventDefault();
 
@@ -59,7 +78,24 @@ function ContactForm() {
       <label>Return Date</label>
       <input type="date" name="returnDate"></input>
       <br></br>
-      <input type="submit" value="Send" onSubmit={sendEmail} />
+      <input
+        type="submit"
+        value="Send"
+        onSubmit={sendEmail}
+        onClick={openModal}
+      />
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+      >
+        <h1>
+          {" "}
+          your form has been submitted! Please be patient while we get back to
+          you as soon as possible.
+        </h1>
+        <button onClick={closeModal}> close </button>
+      </Modal>
     </form>
   );
 }

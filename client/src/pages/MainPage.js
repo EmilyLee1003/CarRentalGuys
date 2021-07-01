@@ -18,8 +18,11 @@ function MainPage() {
   const socketRef = useRef();
 
   useEffect(() => {
+    console.log("useEffect");
     socketRef.current = io("http://localhost:5000");
+    console.log("socketref.current", socketRef.current);
     socketRef.current.on("message", ({ name, message }) => {
+      console.log("received message", name, message);
       setChat([...chat, { name, message }]);
     });
     return () => socketRef.current.disconnect();
@@ -31,7 +34,9 @@ function MainPage() {
 
   const onMessageSubmit = (e) => {
     const { name, message } = state;
-    socketRef.current.emit("message", { name, message });
+    console.log("on Message Submit name", name);
+    console.log(" on message submit", message);
+    socketRef.current.emit("new message", { name, message });
     e.preventDefault();
     setState({ message: "", name });
   };

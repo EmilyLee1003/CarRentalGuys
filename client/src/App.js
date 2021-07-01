@@ -5,9 +5,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Booking from "./pages/booking";
 import MainPage from "./pages/MainPage";
-import About from "./pages/about";
+import About from "./components/about/about";
 import UserAuth from "./pages/UserAuth";
-
+import Footer from "./components/footer/footer";
 function App() {
   return (
     <div className="App">
@@ -22,6 +22,7 @@ function App() {
           </Switch>
         </Router>
       </div>
+      <Footer></Footer>
     </div>
   );
 }

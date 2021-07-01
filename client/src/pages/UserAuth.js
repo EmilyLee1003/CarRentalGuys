@@ -1,17 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
+import Axios from "axios";
+import { useHistory } from "react-router-dom";
+// import LoginButton from "../components/login/loginbutton";
 
 function UserAuth() {
+  const [usernameLogin, setUserNameLogin] = useState("");
+  const [passwordLogin, setPasswordLogin] = useState("");
+
+  const history = useHistory();
+
+  const login = () => {
+    Axios.post("http://localhost:5000", {
+      username: usernameLogin,
+      password: passwordLogin,
+    }).then((response) => {
+      console.log(response);
+    });
+  };
+
+  function loginSucess() {
+    login();
+    history.push("/mainpage");
+  }
   return (
     <div>
       <form>
         <div className="form-group text-left">
-          <label htmlFor="exampleInputEmail1">Email address</label>
+          <label htmlFor="exampleInputEmail1">Username</label>
           <input
-            type="email"
+            type="text"
             className="form-control"
-            id="email"
             aria-describedby="emailHelp"
-            placeholder="Enter email"
+            id="username"
+            onChange={(e) => {
+              setUserNameLogin(e.target.value);
+            }}
           />
         </div>
 
@@ -21,13 +44,13 @@ function UserAuth() {
             type="password"
             className="form-control"
             id="password"
-            placeholder="Password"
+            onChange={(e) => {
+              setPasswordLogin(e.target.value);
+            }}
           />
         </div>
 
-        <button type="submit" className="btn btn-primary">
-          Register
-        </button>
+        <button onClick={loginSucess}>Login</button>
       </form>
     </div>
   );
