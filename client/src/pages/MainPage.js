@@ -10,10 +10,20 @@ import bmw1 from "../img/bmw1.jpg";
 import mercedes2 from "../img/mercedes2.jpg";
 import supra1 from "../img/supra1.jpg";
 import banner1 from "../img/mercedes4.jpg";
+import Modal from "react-modal";
 
 function MainPage() {
   const [state, setState] = useState({ message: "", name: "" });
   const [chat, setChat] = useState([]);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   const socketRef = useRef();
 
@@ -73,36 +83,39 @@ function MainPage() {
       <br></br>
       <br></br>
       <br></br>
+      <button onClick={openModal}>Chat now!</button>
 
-      <div className="card">
-        <form onSubmit={onMessageSubmit}>
-          <h1>Messenger</h1>
-          <div className="name-field">
-            <TextField
-              name="name"
-              onChange={(e) => onTextChange(e)}
-              value={state.name}
-              label="Name"
-            />
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+        <div className="card">
+          <form onSubmit={onMessageSubmit}>
+            <h1>Messenger</h1>
+            <div className="name-field">
+              <TextField
+                name="name"
+                onChange={(e) => onTextChange(e)}
+                value={state.name}
+                label="Name"
+              />
+            </div>
+            <div>
+              <TextField
+                name="message"
+                onChange={(e) => onTextChange(e)}
+                value={state.message}
+                id="outlined-multiline-static"
+                variant="outlined"
+                label="Message"
+              />
+            </div>
+            <button>Send Message</button>
+          </form>
+          <div className="render-chat">
+            <h1>Chat Log</h1>
+            {renderChat()}
           </div>
-          <div>
-            <TextField
-              name="message"
-              onChange={(e) => onTextChange(e)}
-              value={state.message}
-              id="outlined-multiline-static"
-              variant="outlined"
-              label="Message"
-            />
-          </div>
-          <button>Send Message</button>
-        </form>
-        <div className="render-chat">
-          <h1>Chat Log</h1>
-          {renderChat()}
+          <button onClick={closeModal}> close chat</button>
         </div>
-      </div>
-
+      </Modal>
       <div className="carList">
         <div className="car1">
           <Card style={{ width: "30rem" }}>
